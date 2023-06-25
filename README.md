@@ -1,4 +1,7 @@
 # PiBAN
+
+*This is a fork of Real-Time-Kodi's PiBAN in an attempt to replace deprecated wiringpi package requirement.  Use at your own risk!*
+
 Automatic Raspberry-pi based secure hard drive eraser. This will erase any block device plugged into the USB bus using the shred command. It will then create a partition table and a single FAT32 partition to make the drive immediately usable. This is somewhat similar to creating that runs DBaN with the /autonuke option enabled.
 
 The name is based on Derik's Boot and Nuke(DBaN). The software itself is a series of scripts that turn a standard Raspberry Pi into a standalone hard drive eraser. The erasing itself is handled by nwipe which is a fork of dwipe that is included in the debian repository.
