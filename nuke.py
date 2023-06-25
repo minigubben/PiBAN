@@ -16,7 +16,7 @@ def erase_drive(drive):
     ready_led.off()
     if erase_switch.is_pressed:
         log.info("3 Pass Erase Selected")
-        subprocess.run(['nwipe', '--autonuke', '--nogui', '--nowait', drive])
+        subprocess.run(['nwipe', '-v', '--autonuke', '--nogui', '--nowait', '--method=dodshort', drive])
     else:
         log.info("1 Pass Erase Selected")
         subprocess.run(['shred', '-v', '--iterations=1', drive])
