@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
-echo "Detected new device: $1" >>/var/log/PiBAN.log
+#!/bin/bash
 devname=$(basename $1)
 logname=/tmp/$devname.log
-if [ "${ACTION}" = "add" ]
-then
-    /usr/local/bin/nuke.sh $1 >$logname &
+
+echo "Detected new device: $1" >>/var/log/PiBAN.log
+
+if [ "${ACTION}" = "add" ]; then
+    python3 /usr/local/bin/nuke.py $1 >$logname &
     disown
 fi
-
