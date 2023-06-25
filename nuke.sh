@@ -31,12 +31,15 @@ led_ready.off()
 if not button_select.is_pressed:
     subprocess.run(['shred', '-v', '--iterations=1', sys.argv[1]])
 else:
-    subprocess.run(['nwipe', '--autonuke', '--nogui', '--nowait', sys.argv[1]])
+    subprocess.run(['nwipe', '-v', '--autonuke', '--nogui', '--nowait', '--method=dodshort', sys.argv[1]])
 
 led_process.off()
 #-----------------------------------------------------------------------------
 # Format drive with FAT32
 #-----------------------------------------------------------------------------
+with open('/var/log/PiBAN.log', 'a') as log_file:
+    log_file.write(f'FORMATTING {sys.argv[1]}\n')
+
 subprocess.run(['parted', '-s', sys.argv[1], 'mklabel', 'msdos'])
 subprocess.run(['parted', '-s', sys.argv[1], 'mkpart', 'primary', 'fat32', '0%', '100%'])
 subprocess.run(['mkfs.vfat', '-F', '32', f'{sys.argv[1]}1'])
@@ -50,7 +53,7 @@ os.chdir(mntpath)
 
 with open('Erased_With_PiBAN.txt', 'w') as txt_file:
     txt_file.write('This drive has been securely erased and repartitioned with PiBAN\n'
-                   'https://github.com/Real-Time-Kodi/PiBAN')
+                   'https://github.com/vsiupdate/PiBAN')
 
 subprocess.run(['cp', f'/tmp/{devname}.log', '.'])
 
@@ -64,4 +67,4 @@ subprocess.run(['sync'])
 led_ready.on()
 
 with open('/var/log/PiBAN.log', 'a') as log_file:
-    log_file.write(f'Drive Completed {sys.argv[1]}\n')
+    log_file.write(f'DRIVE COMPLETED {sys.argv[1]}\n')
