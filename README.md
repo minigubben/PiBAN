@@ -45,7 +45,7 @@ Start with a clean Raspbian lite install, clone into the repository and run the 
 ```
 sudo apt update
 sudo apt install git
-git clone https://github.com/Real-Time-Kodi/PiBAN
+git clone https://github.com/vsiupdate/PiBAN
 cd PiBAN
 chmod +x *.sh
 ./install.sh
@@ -57,14 +57,27 @@ In the ideal use-case, this software is installed on a Raspberry Pi with no powe
 This makes it impossible to properly shut down the pi. Pulling the power, especially during filesystem-writes, can corrupt the Pi's filesystem.
 Beyond that, Raspbian uses a swap file by default, which can wear out the card prematurely.
 
-To midigate these problems, we can set up Raspbian to use a read only filesystem.
-This project provides a script to do this. This script is likely to break with newer versions of Raspbian so use it with caution. It was devoped for Raspbian Jessie lite.
+~~To midigate these problems, we can set up Raspbian to use a read only filesystem.~~
+~~This project provides a script to do this. This script is likely to break with newer versions of Raspbian so use it with caution. It was devoped for Raspbian Jessie lite.~~
 
-To harden the Pi against SD card failure, you can run the following command from within the git directory. ```sudo ./harden.sh```
-Keep in mind that this process is somewhat **irreversible** and that there is no script provided to undo it.
+~~To harden the Pi against SD card failure, you can run the following command from within the git directory. ```sudo ./harden.sh```~~
+~~Keep in mind that this process is somewhat **irreversible** and that there is no script provided to undo it.~~
+
+UPDATED HARDENING PROCESS: 
+
+Enter the following to open up the Configuration Menu of the Raspberry Pi:
+
+````sudo raspi-config````
+
+* Select Performance Options, press ````ENTER````
+* Select Overlay File System, press ````ENTER````
+* Terminal screen will open and initiate update-initramfs.  Once complete, it will jump back to configuration menu.  Click ````ENTER````
+* Select ````YES```` and click ````ENTER```` to enable read-only boot partition.
+  
+Upon reboot, the RPi is completely in Read-Only Mode.
 
 ### Use
-Booot your pi with any USB storage plugged in. The STATUS LED will light to indicate that the process is running. When the light is out, a pass has been completed and the drive can be unplugged. If more than one pass is required, you may edit the file nuke.sh and mess with the parameters passed to the shred command. When done, run ````sudo ./update.sh````
+Boot your pi.  When READY LED is lit, plug in any USB to being wipe. The STATUS LED will light to indicate that the process is running. When the light is out, a pass has been completed and the drive can be unplugged. If more than one pass is required, you may edit the file nuke.sh and mess with the parameters passed to the shred command. When done, run ````sudo ./update.sh````
 
 #### Customization
 The file nuke.sh is the file that actully does all of the work on the drive itself. It has several examples of how to handle various tasks including:
