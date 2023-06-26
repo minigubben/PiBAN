@@ -47,8 +47,8 @@ sudo apt update
 sudo apt install git
 git clone https://github.com/vsiupdate/PiBAN
 cd PiBAN
-chmod +x *.sh
-./install.sh
+sudo chmod +x *.sh
+sudo ./install.sh
 ```
 
 ##### Hardening the Pi for Reliability.
