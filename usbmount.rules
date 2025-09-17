@@ -1,1 +1,1 @@
-ACTION=="add", KERNEL=="sd*[!0-9]", RUN+="/usr/local/bin/usbmount.sh %N"
+ACTION=="add", KERNEL=="sd*[!0-9]", RUN+="/usr/bin/systemd-run --no-block /usr/bin/python3 /usr/local/bin/nuke.py /dev/%k"
