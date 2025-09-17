@@ -1,6 +1,6 @@
 # PiBAN
 
-*This is a fork of Real-Time-Kodi's PiBAN in an attempt to replace deprecated wiringpi package requirement.  Use at your own risk!*
+*This is a fork of vsiupdate fork of Real-Time-Kodi's PiBAN to improve instalation and fix errors.*
 
 Automatic Raspberry-pi based secure hard drive eraser. This will erase any block device plugged into the USB bus using the shred command. It will then create a partition table and a single FAT32 partition to make the drive immediately usable. This is somewhat similar to creating that runs DBaN with the /autonuke option enabled.
 
@@ -45,7 +45,7 @@ Start with a clean Raspbian lite install, clone into the repository and run the 
 ```
 sudo apt update
 sudo apt install git
-git clone https://github.com/vsiupdate/PiBAN
+git clone https://github.com/minigubben/PiBAN
 cd PiBAN
 sudo chmod +x *.sh
 sudo ./install.sh
@@ -56,14 +56,6 @@ sudo ./install.sh
 In the ideal use-case, this software is installed on a Raspberry Pi with no power button/keyboard/monitor.
 This makes it impossible to properly shut down the pi. Pulling the power, especially during filesystem-writes, can corrupt the Pi's filesystem.
 Beyond that, Raspbian uses a swap file by default, which can wear out the card prematurely.
-
-~~To midigate these problems, we can set up Raspbian to use a read only filesystem.~~
-~~This project provides a script to do this. This script is likely to break with newer versions of Raspbian so use it with caution. It was devoped for Raspbian Jessie lite.~~
-
-~~To harden the Pi against SD card failure, you can run the following command from within the git directory. ```sudo ./harden.sh```~~
-~~Keep in mind that this process is somewhat **irreversible** and that there is no script provided to undo it.~~
-
-UPDATED HARDENING PROCESS: 
 
 Enter the following to open up the Configuration Menu of the Raspberry Pi:
 
